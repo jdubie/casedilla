@@ -1,96 +1,103 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Google font -->
-    <link href='http://fonts.googleapis.com/css?family=Ruthie' rel='stylesheet' type='text/css'>
+    <title>Casey Dubie</title>
 
-    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.css" rel="stylesheet">
+    <link href="style2.css" rel="stylesheet">
+    <link href="pygments.css" rel="stylesheet">
+  </head>
 
-    <!-- soundManager.useFlashBlock: related CSS -->
-    <link rel="stylesheet" type="text/css" href="flashblock.css" />
+  <body>
 
-    <!-- required -->
-    <link rel="stylesheet" type="text/css" href="360player.css" />
-    <link rel="stylesheet" type="text/css" href="360player-visualization.css" />
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-fixed-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Casey Dubie</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav navbar-nav pull-right songs">
+            <li class="song"><a id="1" href="#">In Your Atmosphere</a></li>
+            <li class="song"><a id="3" href="#">Remove the Veil (Demo)</a></li>
+            <li class="song"><a id="2" href="#">Leaving You Behind</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
 
-    <!-- special IE-only canvas fix -->
-    <!--[if IE]><script type="text/javascript" src="script/excanvas.js"></script><![endif]-->
+    <div class="container">
 
-    <!-- Apache-licensed animation library -->
-    <script type="text/javascript" src="berniecode-animator.js"></script>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="jumbotron">
+            <h1>Casey Dubie</h1>
+            <p>
+              Singer. Songwriter. Vermonter.
+            </p>
+            <p>
+              <a class="btn btn-large btn-primary" href="http://www.youtube.com/user/CaseyDubieMusic">Youtube channel &raquo;</a>
+            </p>
+            <p>
+              <a class="btn btn-large btn-primary" href="https://itunes.apple.com/us/album/in-your-atmosphere/id401364895">Album in iTunes &raquo;</a>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="jumbotron">
+            <img class="mug-shot" src="dogs.jpg"></img>
+          </div>
+        </div>
+      </div>
 
-    <!-- the core stuff -->
-    <script type="text/javascript" src="soundmanager2.js"></script>
-    <script type="text/javascript" src="360player.js"></script>
+    </div> <!-- /container -->
 
-    <script type="text/javascript">
-
+    <!-- JS for playin' tunez -->
+    <script src="soundmanager2.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      var createSongs = function(songs) {
+        for (var i in songs) {
+          var song = songs[i];
+          soundManager.createSound({
+            id: song,
+            url: '/music/' + song + '.mp3',
+            autoLoad: false,
+            autoPlay: false,
+            onload: function() {
+            },
+            volume: 50
+          });
+        }
+      }
       soundManager.setup({
-        // path to directory containing SM2 SWF
-        url: 'soundm/swf/'
+        url: '/soundm/swf/',
+        flashVersion: 9, // optional: shiny features (default = 8)
+        // optional: ignore Flash where possible, use 100% HTML5 mode
+        // preferFlash: false,
+        onready: function() {
+          createSongs(['1', '2', '3']);
+        }
       });
 
-      threeSixtyPlayer.config.scaleFont = (navigator.userAgent.match(/msie/i)?false:true);
-      threeSixtyPlayer.config.showHMSTime = true;
+      $('.songs').click(function (e) {
+        var songId = e.target.id;
+        $('li.song').removeClass('active');
+        $('#' + songId).parent().addClass('active');
+        soundManager.pauseAll();
+        soundManager.play(songId);
+      });
 
-      // enable some spectrum stuffs
-
-      threeSixtyPlayer.config.useWaveformData = true;
-      threeSixtyPlayer.config.useEQData = true;
-
-      // enable this in SM2 as well, as needed
-
-      if (threeSixtyPlayer.config.useWaveformData) {
-        soundManager.flash9Options.useWaveformData = true;
-      }
-      if (threeSixtyPlayer.config.useEQData) {
-        soundManager.flash9Options.useEQData = true;
-      }
-      if (threeSixtyPlayer.config.usePeakData) {
-        soundManager.flash9Options.usePeakData = true;
-      }
-
-      if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.useEQData || threeSixtyPlayer.flash9Options.usePeakData) {
-        // even if HTML5 supports MP3, prefer flash so the visualization features can be used.
-        soundManager.preferFlash = true;
-      }
-
-      // favicon is expensive CPU-wise, but can be enabled.
-      threeSixtyPlayer.config.useFavIcon = false;
-
-  </script>
-
-
-    <style type="text/css">
-
-      h1.title {
-        text-align: center;
-        font-family: 'Ruthie', cursive;
-        font-size: 100px;
-        color: white;
-      }
-
-      #songs {
-        width: 50%;
-        margin: 0px auto;
-      }
-
-      body {
-        background: url('images/casey.jpg') no-repeat center center fixed
-      }
-
-    </style>
-  </head>
-  <body>
-    <h1 class="title">Casey Lynn Dubie</h1>
-    <div id="sm2-container">
-      <!-- sm2 flash goes here -->
-    </div>
-    <!-- here are the MP3 links, which are decorated with the 360 canvas element/UI etc. -->                                                                                                        
-    <div id="songs" class="sm2-inline-list"> <!-- remove this class to have one item per line -->
-      <div class="ui360 ui360-vis"><a href="music/1.mp3">In Your Atmosphere</a></div>
-      <div class="ui360 ui360-vis"><a href="music/2.mp3">Leaving You Behind</a></div>
-    </div>
+    </script>
   </body>
 </html>
-

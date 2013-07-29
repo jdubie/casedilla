@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+
+    <!-- soundManager.useFlashBlock: related CSS -->
+    <link rel="stylesheet" type="text/css" href="flashblock.css" />
+
+    <!-- required -->
+    <link rel="stylesheet" type="text/css" href="360player.css" />
+    <link rel="stylesheet" type="text/css" href="360player-visualization.css" />
+
+    <!-- special IE-only canvas fix -->
+    <!--[if IE]><script type="text/javascript" src="script/excanvas.js"></script><![endif]-->
+
+    <!-- Apache-licensed animation library -->
+    <script type="text/javascript" src="berniecode-animator.js"></script>
+
+    <!-- the core stuff -->
+    <script type="text/javascript" src="soundmanager2.js"></script>
+    <script type="text/javascript" src="360player.js"></script>
+
+    <script type="text/javascript">
+
+      soundManager.setup({
+        // path to directory containing SM2 SWF
+        url: 'soundm/swf/'
+      });
+
+      threeSixtyPlayer.config.scaleFont = (navigator.userAgent.match(/msie/i)?false:true);
+      threeSixtyPlayer.config.showHMSTime = true;
+
+      // enable some spectrum stuffs
+
+      threeSixtyPlayer.config.useWaveformData = true;
+      threeSixtyPlayer.config.useEQData = true;
+
+      // enable this in SM2 as well, as needed
+
+      if (threeSixtyPlayer.config.useWaveformData) {
+        soundManager.flash9Options.useWaveformData = true;
+      }
+      if (threeSixtyPlayer.config.useEQData) {
+        soundManager.flash9Options.useEQData = true;
+      }
+      if (threeSixtyPlayer.config.usePeakData) {
+        soundManager.flash9Options.usePeakData = true;
+      }
+
+      if (threeSixtyPlayer.config.useWaveformData || threeSixtyPlayer.flash9Options.useEQData || threeSixtyPlayer.flash9Options.usePeakData) {
+        // even if HTML5 supports MP3, prefer flash so the visualization features can be used.
+        soundManager.preferFlash = true;
+      }
+
+      // favicon is expensive CPU-wise, but can be enabled.
+      threeSixtyPlayer.config.useFavIcon = false;
+
+  </script>
+
+
+    <style type="text/css">
+
+      h1.title {
+        text-align: center;
+        font-family: 'Ruthie', cursive;
+        font-size: 100px;
+        color: white;
+      }
+
+      #songs {
+        width: 50%;
+        margin: 0px auto;
+      }
+
+      body {
+        /*background: url('images/casey.jpg') no-repeat center center fixed*/
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Casey Lynn Dubie</h1>
+    <div id="sm2-container">
+      <!-- sm2 flash goes here -->
+    </div>
+    <!-- here are the MP3 links, which are decorated with the 360 canvas element/UI etc. -->                                                                                                        
+    <!-- <div id="songs" class="sm2-inline-list"> -->
+      <script src="http://www.gmodules.com/ig/ifr?url=http://www.google.com/ig/modules/youtube.xml&amp;up_channel=CaseyDubieMusic&amp;synd=open&amp;w=320&amp;h=390&amp;title=&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+
+    <div style="display:none" id="songs"> <!-- remove this class to have one item per line -->
+      <div class="ui360 ui360-vis"><a href="music/1.mp3">In Your Atmosphere</a></div>
+      <div class="ui360 ui360-vis"><a href="music/3.mp3">Remove the Veil (Demo)</a></div>
+      <div class="ui360 ui360-vis"><a href="music/2.mp3">Leaving You Behind</a></div>
+    </div>
+
+<!-- Docs master nav -->
+<div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+<div class="container">
+<a href="./" class="navbar-brand">Bootstrap 3 RC1</a>
+<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<div class="nav-collapse collapse bs-navbar-collapse">
+<ul class="nav navbar-nav">
+<li>
+<a href="./getting-started">Getting started</a>
+</li>
+<li>
+<a href="./css">CSS</a>
+</li>
+<li>
+<a href="./components">Components</a>
+</li>
+<li>
+<a href="./javascript">JavaScript</a>
+</li>
+<li>
+<a href="./customize">Customize</a>
+</li>
+</ul>
+</div>
+  </div>
+</div>
+  </body>
+</html>
