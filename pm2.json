@@ -1,0 +1,5 @@
+{
+  "name"      : "caseydubie.com",
+  "script"    : "./app.js",
+  "instances" : "1"
+}

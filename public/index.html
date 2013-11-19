@@ -16,7 +16,7 @@
 
   <body>
 
-    <!-- Fixed navbar -->
+    <!--
     <div class="navbar navbar-fixed-top">
       <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -26,78 +26,44 @@
         </button>
         <a class="navbar-brand" href="#">Casey Dubie</a>
         <div class="nav-collapse collapse">
-          <ul class="nav navbar-nav pull-right songs">
-            <li class="song"><a id="1" href="#">In Your Atmosphere</a></li>
-            <li class="song"><a id="3" href="#">Remove the Veil (Demo)</a></li>
-            <li class="song"><a id="2" href="#">Leaving You Behind</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
+    -->
 
     <div class="container">
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-7">
           <div class="jumbotron">
             <h1>Casey Dubie</h1>
             <p>
               Singer. Songwriter. Vermonter.
             </p>
-            <p>
-              <a class="btn btn-large btn-primary" href="http://www.youtube.com/user/CaseyDubieMusic">Youtube channel &raquo;</a>
-            </p>
-            <p>
-              <a class="btn btn-large btn-primary" href="https://itunes.apple.com/us/album/in-your-atmosphere/id401364895">Album in iTunes &raquo;</a>
-            </p>
+            <br/>
+            <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F11912598"></iframe>
           </div>
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-5">
           <div class="jumbotron">
             <img class="mug-shot" src="images/casey2.jpg"></img>
+            <br/>
+            <br/>
+            <p>
+              <a class="btn btn-large btn-success" href="/Neverland.zip">Download Neverland Album &raquo;</a>
+            </p>
+            <p class="links">
+              <a href="http://www.youtube.com/watch?v=h0TAr9HaT7c">Cover of Thrift Shop</a>
+              <a>&bull;</a>
+              <a href="http://www.youtube.com/user/CaseyDubieMusic">Youtube channel</a>
+              <a>&bull;</a>
+              <a href="https://itunes.apple.com/us/album/in-your-atmosphere/id401364895">Album in iTunes</a>
+            </p>
           </div>
         </div>
       </div>
 
     </div> <!-- /container -->
-
-    <!-- JS for playin' tunez -->
-    <script src="soundmanager2.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-      var createSongs = function(songs) {
-        for (var i in songs) {
-          var song = songs[i];
-          soundManager.createSound({
-            id: song,
-            url: '/music/' + song + '.mp3',
-            autoLoad: false,
-            autoPlay: false,
-            onload: function() {
-            },
-            volume: 50
-          });
-        }
-      }
-      soundManager.setup({
-        url: '/soundm/swf/',
-        flashVersion: 9, // optional: shiny features (default = 8)
-        // optional: ignore Flash where possible, use 100% HTML5 mode
-        // preferFlash: false,
-        onready: function() {
-          createSongs(['1', '2', '3']);
-        }
-      });
-
-      $('.songs').click(function (e) {
-        var songId = e.target.id;
-        $('li.song').removeClass('active');
-        $('#' + songId).parent().addClass('active');
-        soundManager.pauseAll();
-        soundManager.play(songId);
-      });
-
-    </script>
   </body>
 </html>

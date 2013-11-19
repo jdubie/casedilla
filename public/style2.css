@@ -1,9 +1,13 @@
 body {
-  padding-top: 60px;
+  padding-top: 30px;
 }
 
 .jumbotron {
   margin-top: 20px;
+}
+
+.jumbotron p.links a {
+  font-size: 14px;
 }
 
 .mug-shot {
